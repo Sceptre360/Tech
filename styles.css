@@ -24,6 +24,7 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
+    padding-top: 60px;
 }
 
 /* Responsive Navigation */
@@ -881,12 +882,19 @@ body {
 }
 
 .custom-service {
-    margin-top: 3rem;
+    margin-top: 1.5rem;
     padding: 2rem;
     background: rgba(30, 30, 30, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 15px;
-    position: relative;
-    overflow: hidden;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.custom-service:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-blue);
+    box-shadow: 0 10px 30px rgba(0, 112, 243, 0.2);
 }
 
 .circuit-background {
