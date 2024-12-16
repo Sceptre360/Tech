@@ -161,6 +161,7 @@ body {
     overflow: hidden;
     border: none;
     cursor: pointer;
+    width: 100%;
 }
 
 .primary-button::before {
@@ -209,7 +210,7 @@ body {
 
 /* Innovative Top Bar */
 .top-bar {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
@@ -1297,6 +1298,51 @@ body {
     border-radius: 5px;
     background-color: var(--secondary-dark);
     color: var(--text-primary);
+}
+
+/* Media Queries for Mobile Devices */
+@media (max-width: 768px) {
+    .primary-button,
+    .tech-button {
+        padding: 0.75rem 1.5rem; /* Increase padding for better touch targets */
+        font-size: 1rem; /* Adjust font size for readability */
+        width: 100%; /* Make buttons full width */
+        margin: 0.5rem 0; /* Add margin for spacing */
+    }
+
+    .service-card,
+    .automation-card,
+    .webdev-card,
+    .contact-card {
+        padding: 1.5rem; /* Adjust padding for cards */
+        margin: 1rem 0; /* Add margin for spacing between cards */
+    }
+
+    .section-content {
+        padding: 10px; /* Reduce padding for mobile */
+        text-align: center; /* Center text for better layout */
+    }
+
+    .nav-button {
+        flex-basis: calc(50% - 10px); /* Adjust button size for mobile */
+        margin: 5px; /* Add margin for spacing */
+    }
+}
+
+@media (max-width: 480px) {
+    .primary-button,
+    .tech-button {
+        padding: 0.5rem 1rem; /* Adjust padding for smaller screens */
+        font-size: 0.9rem; /* Adjust font size for smaller screens */
+    }
+
+    .section-title {
+        font-size: 1.5rem; /* Adjust title size for smaller screens */
+    }
+
+    .section-description {
+        font-size: 0.9rem; /* Adjust description size for smaller screens */
+    }
 }
 
 
