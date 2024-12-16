@@ -315,25 +315,47 @@ body {
     transition: all 0.3s ease;
 }
 
+
+.auth-btn {
+    position: relative;
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid var(--accent-blue);
+    border-radius: 8px;
+    color: var(--text-primary);
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.btn-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    z-index: 2;
+}
+
+.circuit-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(90deg, transparent 50%, rgba(0, 112, 243, 0.1) 50%),
+        linear-gradient(0deg, transparent 50%, rgba(0, 112, 243, 0.1) 50%);
+    background-size: 4px 4px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
 .auth-btn:hover {
     background: rgba(0, 112, 243, 0.1);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 112, 243, 0.2);
 }
 
-.auth-btn:hover .circuit-lines {
-    opacity: 1;
-    animation: circuitMove 20s linear infinite;
-}
-
-.auth-btn.signup {
-    border-color: var(--accent-green);
-}
-
-.auth-btn.signup:hover {
-    background: rgba(16, 185, 129, 0.1);
-    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.2);
-}
 
 @keyframes rotateDots {
     0% { transform: rotate(0deg); }
