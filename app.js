@@ -82,6 +82,40 @@ document.addEventListener('DOMContentLoaded', () => {
     contactExploreBtn?.addEventListener('click', function() {
         contactExpandedContent.classList.toggle('active');
     });
+
+    const userIcon = document.getElementById('user-icon');
+    const modal = document.getElementById('auth-modal');
+    const closeModal = document.getElementById('close-modal');
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const authForms = document.querySelectorAll('.auth-form');
+
+    userIcon.addEventListener('click', () => {
+        modal.style.display = 'block';
+    });
+
+    closeModal.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const tab = button.getAttribute('data-tab');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            authForms.forEach(form => {
+                form.classList.remove('active');
+                if (form.id === `${tab}-form`) {
+                    form.classList.add('active');
+                }
+            });
+        });
+    });
 });
 
 function filterProducts(category) {
