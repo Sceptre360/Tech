@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechScale Innovations - Next Generation Technology</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <div class="top-bar">
+        <div class="logo">
+            <div class="logo-icon">
+                <div class="cube-wrapper">
+                    <div class="cube">
+                        <div class="cube-face front"></div>
+                        <div class="cube-face back"></div>
+                        <div class="cube-face right"></div>
+                        <div class="cube-face left"></div>
+                        <div class="cube-face top"></div>
+                        <div class="cube-face bottom"></div>
+                    </div>
+                </div>
+            </div>
+            TeQScale
+        </div>
+        <div class="user-auth">
+            <div class="auth-status">
+                <div class="neural-circle">
+                    <div class="neural-dots"></div>
+                    <i class="fas fa-user-circle" id="user-icon"></i>
+                </div>
+                <div class="auth-buttons" id="auth-buttons">
+                    <button class="auth-btn signin">
+                        <span class="btn-content">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Sign In
+                        </span>
+                    </button>
+                    <button class="auth-btn signup">
+                        <span class="btn-content">
+                            <i class="fas fa-user-plus"></i>
+                            Sign Up
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Background Grid -->
+    <div class="background-grid"></div>
+
+    <!-- Main Navigation -->
+    <nav class="navigation">
+        <a href="#home" class="nav-button active" data-section="home">
+            <i class="fas fa-home nav-button-icon"></i>
+            <span class="nav-button-text">Home</span>
+        </a>
+        <a href="#products" class="nav-button" data-section="products">
+            <i class="fas fa-cube nav-button-icon"></i>
+            <span class="nav-button-text">Products</span>
+        </a>
+        <a href="#services" class="nav-button" data-section="services">
+            <i class="fas fa-cogs nav-button-icon"></i>
+            <span class="nav-button-text">Services</span>
+        </a>
+        <a href="#ai" class="nav-button" data-section="ai">
+            <i class="fas fa-brain nav-button-icon"></i>
+            <span class="nav-button-text">AI</span>
+        </a>
+        <a href="#automation" class="nav-button" data-section="automation">
+            <i class="fas fa-robot nav-button-icon"></i>
+            <span class="nav-button-text">Automation</span>
+        </a>
+        <a href="#web-dev" class="nav-button" data-section="web-dev">
+            <i class="fas fa-code nav-button-icon"></i>
+            <span class="nav-button-text">Web Dev</span>
+        </a>
+        <a href="#contact" class="nav-button" data-section="contact">
+            <i class="fas fa-envelope nav-button-icon"></i>
+            <span class="nav-button-text">Contact</span>
+        </a>
+    </nav>
+
+    <!-- Main Content Sections -->
+    <section id="home" class="section active">
+        <div class="section-content">
+            <!-- Initial View -->
+            <div class="initial-view">
+                <h1 class="section-title">TechScale Innovations</h1>
+                <p class="section-description">
+                    Transforming businesses through cutting-edge technology and innovative solutions
+                </p>
+                <button class="primary-button">Explore Our Solutions</button>
+            </div>
+
+            <!-- Expanded Content -->
+            <div class="expanded-content">
+                <!-- Solutions Grid -->
+                <div class="solutions-grid">
+                    <div class="solution-card">
+                        <div class="card-icon">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                        <h3>AI Integration</h3>
+                        <p>Advanced machine learning solutions for business optimization</p>
+                    </div>
+                    <div class="solution-card">
+                        <div class="card-icon">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <h3>Cloud Services</h3>
+                        <p>Scalable cloud infrastructure for modern enterprises</p>
+                    </div>
+                    <div class="solution-card">
+                        <div class="card-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Cyber Security</h3>
+                        <p>Enterprise-grade security solutions</p>
+                    </div>
+                </div>
+
+                <!-- Blog Section -->
+                <div class="blog-section">
+                    <h2 class="section-subtitle">Latest Insights</h2>
+                    <div class="blog-grid">
+                        <article class="blog-card">
+                            <div class="blog-image">
+                                <div class="tech-overlay"></div>
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="blog-content">
+                                <span class="blog-tag">AI & ML</span>
+                                <h3>The Future of AI in Enterprise</h3>
+                                <p>Exploring how artificial intelligence is reshaping business operations...</p>
+                                <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                        <article class="blog-card">
+                            <div class="blog-image">
+                                <div class="tech-overlay"></div>
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <div class="blog-content">
+                                <span class="blog-tag">Cloud Computing</span>
+                                <h3>Cloud Migration Strategies</h3>
+                                <p>Best practices for seamless cloud transformation...</p>
+                                <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reference to existing sections -->
+    <section id="products" class="section">
+        <div class="section-content">
+            <!-- Initial View -->
+            <div class="initial-product-view">
+                <h2 class="section-title">Our Innovative Products</h2>
+                <p class="section-description">
+                    Advanced technological solutions designed to revolutionize your business ecosystem
+                </p>
+                <button class="primary-button product-explore">Explore Products</button>
+            </div>
+
+            <!-- Expanded Product Content -->
+            <div class="product-expanded-content">
+                <!-- Product Categories -->
+                <div class="product-categories">
+                    <button class="category-btn active" data-category="ai">
+                        <i class="fas fa-brain"></i>
+                        AI Solutions
+                    </button>
+                    <button class="category-btn" data-category="cloud">
+                        <i class="fas fa-cloud"></i>
+                        Cloud Products
+                    </button>
+                    <button class="category-btn" data-category="security">
+                        <i class="fas fa-shield-alt"></i>
+                        Security Tools
+                    </button>
+                </div>
+
+                <!-- Product Showcase -->
+                <div class="product-showcase">
+                    <div class="product-grid">
+                        <div class="product-card" data-category="ai">
+                            <div class="product-hologram">
+                                <div class="hologram-effect"></div>
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="product-info">
+                                <h3>TechScale AI Assistant</h3>
+                                <p>Advanced AI-powered business assistant</p>
+                                <div class="tech-specs">
+                                    <span>ML-Powered</span>
+                                    <span>Real-time</span>
+                                    <span>Scalable</span>
+                                </div>
+                                <button class="tech-button">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Stats -->
+                <div class="product-stats">
+                    <div class="stat-container">
+                        <div class="stat-ring">
+                            <svg viewBox="0 0 100 100">
+                                <circle class="progress-ring" cx="50" cy="50" r="45"/>
+                            </svg>
+                            <span class="stat-number">98%</span>
+                        </div>
+                        <span class="stat-label">Client Satisfaction</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section">
+        <div class="section-content">
+            <!-- Initial View -->
+            <div class="initial-service-view">
+                <h2 class="section-title">Comprehensive Services</h2>
+                <p class="section-description">
+                    End-to-end technology services that drive digital transformation
+                </p>
+                <button class="primary-button service-explore">Discover Services</button>
+            </div>
+
+            <!-- Expanded Service Content -->
+            <div class="service-expanded-content">
+                <div class="service-grid">
+                    <!-- Phone Repair Service -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <div class="icon-hologram">
+                                <i class="fas fa-mobile-alt"></i>
+                                <div class="hologram-rings"></div>
+                            </div>
+                        </div>
+                        <h3>Smart Device Repair</h3>
+                        <p>Professional repair services for smartphones, tablets, and other smart devices</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> Screen Replacement</li>
+                            <li><i class="fas fa-check-circle"></i> Battery Service</li>
+                            <li><i class="fas fa-check-circle"></i> Water Damage Repair</li>
+                        </ul>
+                        <button class="tech-button">Schedule Repair</button>
+                    </div>
+
+                    <!-- Import Services -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <div class="icon-hologram">
+                                <i class="fas fa-shipping-fast"></i>
+                                <div class="hologram-rings"></div>
+                            </div>
+                        </div>
+                        <h3>Import Services</h3>
+                        <p>Streamlined import solutions for tech products and components</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> Global Sourcing</li>
+                            <li><i class="fas fa-check-circle"></i> Custom Clearance</li>
+                            <li><i class="fas fa-check-circle"></i> Logistics Management</li>
+                        </ul>
+                        <button class="tech-button">Get Quote</button>
+                    </div>
+
+                    <!-- Software Services -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <div class="icon-hologram">
+                                <i class="fas fa-laptop-code"></i>
+                                <div class="hologram-rings"></div>
+                            </div>
+                        </div>
+                        <h3>Software Solutions</h3>
+                        <p>Comprehensive software repair and optimization services</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> System Recovery</li>
+                            <li><i class="fas fa-check-circle"></i> Virus Removal</li>
+                            <li><i class="fas fa-check-circle"></i> Performance Tuning</li>
+                        </ul>
+                        <button class="tech-button">Diagnose Now</button>
+                    </div>
+                </div>
+
+                <!-- Custom Service Request -->
+                <div class="custom-service">
+                    <div class="custom-service-content">
+                        <div class="circuit-background"></div>
+                        <h3>Need a Custom Service?</h3>
+                        <p>Can't find what you're looking for? Let us know your requirements</p>
+                        <button class="primary-button custom-service-btn">
+                            <i class="fas fa-plus-circle"></i>
+                            Request Custom Service
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ai" class="section">
+        <div class="section-content">
+            <h2 class="section-title">AI Solutions</h2>
+            <p class="section-description">
+                Intelligent AI systems that learn, adapt, and solve complex challenges
+            </p>
+            <button class="primary-button">Explore AI Technologies</button>
+        </div>
+    </section>
+
+    <section id="automation" class="section">
+        <div class="section-content">
+            <!-- Initial View -->
+            <div class="initial-automation-view">
+                <h2 class="section-title">Business Automation</h2>
+                <p class="section-description">
+                    Streamline operations with intelligent automation and workflow optimization
+                </p>
+                <button class="primary-button automation-explore">Explore Automation Tools</button>
+            </div>
+
+            <!-- Expanded Automation Content -->
+            <div class="automation-expanded-content">
+                <div class="automation-grid">
+                    <!-- Receipt Generator -->
+                    <div class="automation-card">
+                        <div class="tool-icon">
+                            <div class="icon-hologram">
+                                <i class="fas fa-receipt"></i>
+                                <div class="hologram-rings"></div>
+                            </div>
+                        </div>
+                        <h3>Smart Receipt Generator</h3>
+                        <p>Generate professional receipts with automated calculations and branding</p>
+                        <div class="tool-features">
+                            <span><i class="fas fa-check"></i> Custom Templates</span>
+                            <span><i class="fas fa-check"></i> Auto-Calculations</span>
+                            <span><i class="fas fa-check"></i> Digital Storage</span>
+                        </div>
+                        <button class="tech-button">Generate Receipt</button>
+                    </div>
+
+                    <!-- Inventory Management -->
+                    <div class="automation-card">
+                        <div class="tool-icon">
+                            <div class="icon-hologram">
+                                <i class="fas fa-boxes"></i>
+                                <div class="hologram-rings"></div>
+                            </div>
+                        </div>
+                        <h3>Inventory Tracker</h3>
+                        <p>Real-time inventory management with automated alerts and tracking</p>
+                        <div class="tool-features">
+                            <span><i class="fas fa-check"></i> Stock Alerts</span>
+                            <span><i class="fas fa-check"></i> Barcode Scanning</span>
+                            <span><i class="fas fa-check"></i> Analytics</span>
+                        </div>
+                        <button class="tech-button">Manage Inventory</button>
+                    </div>
+
+                    <!-- Sales Record -->
+                    <div class="automation-card">
+                        <div class="tool-icon">
+                            <div class="icon-hologram">
+                                <i class="fas fa-chart-line"></i>
+                                <div class="hologram-rings"></div>
+                            </div>
+                        </div>
+                        <h3>Sales Tracker</h3>
+                        <p>Comprehensive sales monitoring and analysis system</p>
+                        <div class="tool-features">
+                            <span><i class="fas fa-check"></i> Real-time Updates</span>
+                            <span><i class="fas fa-check"></i> Performance Metrics</span>
+                            <span><i class="fas fa-check"></i> Trend Analysis</span>
+                        </div>
+                        <button class="tech-button">Track Sales</button>
+                    </div>
+
+                    <!-- Profit/Loss Calculator -->
+                    <div class="automation-card">
+                        <div class="tool-icon">
+                            <div class="icon-hologram">
+                                <i class="fas fa-calculator"></i>
+                                <div class="hologram-rings"></div>
+                            </div>
+                        </div>
+                        <h3>Profit Analytics</h3>
+                        <p>Advanced profit/loss calculation and financial analysis</p>
+                        <div class="tool-features">
+                            <span><i class="fas fa-check"></i> Auto Calculations</span>
+                            <span><i class="fas fa-check"></i> Visual Reports</span>
+                            <span><i class="fas fa-check"></i> Forecasting</span>
+                        </div>
+                        <button class="tech-button">Calculate P/L</button>
+                    </div>
+
+                    <!-- Credit Record -->
+                    <div class="automation-card">
+                        <div class="tool-icon">
+                            <div class="icon-hologram">
+                                <i class="fas fa-handshake"></i>
+                                <div class="hologram-rings"></div>
+                            </div>
+                        </div>
+                        <h3>Credit Manager</h3>
+                        <p>Track and manage credit sales with automated reminders</p>
+                        <div class="tool-features">
+                            <span><i class="fas fa-check"></i> Payment Tracking</span>
+                            <span><i class="fas fa-check"></i> Auto Reminders</span>
+                            <span><i class="fas fa-check"></i> Credit History</span>
+                        </div>
+                        <button class="tech-button">Manage Credit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="web-dev" class="section">
+        <div class="section-content">
+            <!-- Initial View -->
+            <div class="initial-webdev-view">
+                <h2 class="section-title">Web Development</h2>
+                <p class="section-description">
+                    Create stunning, high-performance web applications tailored to your business
+                </p>
+                <button class="primary-button webdev-explore">View Web Solutions</button>
+            </div>
+
+            <!-- Expanded Web Development Content -->
+            <div class="webdev-expanded-content">
+                <div class="webdev-grid">
+                    <!-- School Websites -->
+                    <div class="webdev-card">
+                        <div class="web-icon">
+                            <div class="icon-hologram">
+                                <i class="fas fa-school"></i>
+                                <div class="hologram-rings"></div>
+                            </div>
+                        </div>
+                        <h3>Educational Platforms</h3>
+                        <p>Custom school websites with learning management systems</p>
+                        <div class="web-features">
+                            <span><i class="fas fa-check"></i> Student Portals</span>
+                            <span><i class="fas fa-check"></i> Course Management</span>
+                            <span><i class="fas fa-check"></i> Results System</span>
+                        </div>
+                        <button class="tech-button">Learn More</button>
+                    </div>
+
+                    <!-- Hospital Websites -->
+                    <div class="webdev-card">
+                        <div class="web-icon">
+                            <div class="icon-hologram">
+                                <i class="fas fa-hospital"></i>
+                                <div class="hologram-rings"></div>
+                            </div>
+                        </div>
+                        <h3>Healthcare Solutions</h3>
+                        <p>Advanced hospital management and patient care systems</p>
+                        <div class="web-features">
+                            <span><i class="fas fa-check"></i> Appointment Booking</span>
+                            <span><i class="fas fa-check"></i> Patient Records</span>
+                            <span><i class="fas fa-check"></i> Telemedicine Support</span>
+                        </div>
+                        <button class="tech-button">Explore Features</button>
+                    </div>
+
+                    <!-- Personal Websites -->
+                    <div class="webdev-card">
+                        <div class="web-icon">
+                            <div class="icon-hologram">
+                                <i class="fas fa-user-tie"></i>
+                                <div class="hologram-rings"></div>
+                            </div>
+                        </div>
+                        <h3>Personal Portfolios</h3>
+                        <p>Showcase your professional identity with stunning portfolios</p>
+                        <div class="web-features">
+                            <span><i class="fas fa-check"></i> Custom Design</span>
+                            <span><i class="fas fa-check"></i> Project Showcase</span>
+                            <span><i class="fas fa-check"></i> Blog Integration</span>
+                        </div>
+                        <button class="tech-button">Start Building</button>
+                    </div>
+
+                    <!-- Blockchain Solutions -->
+                    <div class="webdev-card">
+                        <div class="web-icon">
+                            <div class="icon-hologram">
+                                <i class="fas fa-link"></i>
+                                <div class="hologram-rings"></div>
+                            </div>
+                        </div>
+                        <h3>Blockchain Technology</h3>
+                        <p>Decentralized applications and smart contract development</p>
+                        <div class="web-features">
+                            <span><i class="fas fa-check"></i> Smart Contracts</span>
+                            <span><i class="fas fa-check"></i> DeFi Solutions</span>
+                            <span><i class="fas fa-check"></i> NFT Platforms</span>
+                        </div>
+                        <button class="tech-button">Discover More</button>
+                    </div>
+
+                    <!-- Web Dev Learning -->
+                    <div class="webdev-card">
+                        <div class="web-icon">
+                            <div class="icon-hologram">
+                                <i class="fas fa-graduation-cap"></i>
+                                <div class="hologram-rings"></div>
+                            </div>
+                        </div>
+                        <h3>Web Development Training</h3>
+                        <p>Learn modern web development from industry experts</p>
+                        <div class="web-features">
+                            <span><i class="fas fa-check"></i> Interactive Courses</span>
+                            <span><i class="fas fa-check"></i> Live Projects</span>
+                            <span><i class="fas fa-check"></i> Mentorship</span>
+                        </div>
+                        <button class="tech-button">Start Learning</button>
+                    </div>
+
+                    <!-- E-commerce Development -->
+                    <div class="webdev-card">
+                        <div class="web-icon">
+                            <div class="icon-hologram">
+                                <i class="fas fa-shopping-cart"></i>
+                                <div class="hologram-rings"></div>
+                            </div>
+                        </div>
+                        <h3>E-commerce Solutions</h3>
+                        <p>Build robust online stores with seamless payment integration and user-friendly interfaces</p>
+                        <div class="web-features">
+                            <span><i class="fas fa-check"></i> Shopping Cart Integration</span>
+                            <span><i class="fas fa-check"></i> Payment Gateway Setup</span>
+                            <span><i class="fas fa-check"></i> Inventory Management</span>
+                        </div>
+                        <button class="tech-button">Start Selling</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="section-content">
+            <h2 class="section-title">Contact Us</h2>
+            <p class="section-description">
+                Ready to transform your business? Let's connect and explore possibilities.
+            </p>
+            <button class="primary-button contact-explore">Get in Touch</button>
+        </div>
+
+        <!-- Expanded Contact Content -->
+        <div class="contact-expanded-content">
+            <div class="contact-grid">
+                <!-- Phone Contact -->
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>Phone</h3>
+                    <p>+1 (234) 567-8901</p>
+                </div>
+
+                <!-- Email Contact -->
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p>info@techscale.com</p>
+                </div>
+
+                <!-- WhatsApp Contact -->
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3>WhatsApp</h3>
+                    <p>+1 (234) 567-8901</p>
+                </div>
+
+                <!-- Facebook Contact -->
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
+                    <h3>Facebook</h3>
+                    <p><a href="https://facebook.com/techscale" target="_blank">facebook.com/techscale</a></p>
+                </div>
+
+                <!-- X (formerly Twitter) Contact -->
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-x-twitter"></i>
+                    </div>
+                    <h3>X (Twitter)</h3>
+                    <p><a href="https://twitter.com/techscale" target="_blank">@techscale</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="user-section" class="section">
+        <div class="section-content">
+            <h2 class="section-title">User Account</h2>
+            <p class="section-description">Access your account or create a new one.</p>
+            <div class="user-buttons">
+                <button class="primary-button login-button">Login</button>
+                <button class="primary-button signup-button">Sign Up</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
