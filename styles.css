@@ -129,12 +129,13 @@ body {
 
 /* Page Sections */
 .section {
-    min-height: 100vh;
+    min-height: calc(100vh - 60px - 60px);
     display: none;
     opacity: 0;
     transition: opacity 0.5s ease;
     background-color: var(--primary-dark);
     padding: 20px;
+    margin-top: 60px;
 }
 
 .section.active {
