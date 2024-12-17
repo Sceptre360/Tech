@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Remove active states
             navButtons.forEach(btn => btn.classList.remove('active'));
-            sections.forEach(section => section.classList.remove('active'));
+            sections.forEach(sec => sec.classList.remove('active'));
 
             // Activate selected section and button
             button.classList.add('active');
@@ -40,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const productExploreBtn = document.querySelector('.product-explore');
     const initialView = document.querySelector('.initial-product-view');
     const expandedContent = document.querySelector('.product-expanded-content');
-    const categoryBtns = document.querySelectorAll('.category-btn');
 
     productExploreBtn?.addEventListener('click', () => {
         initialView.style.display = 'none';
@@ -48,6 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
         expandedContent.style.display = 'flex';
     });
 
+    // Category Buttons for Products
+    const categoryBtns = document.querySelectorAll('.category-btn');
     categoryBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             categoryBtns.forEach(b => b.classList.remove('active'));
@@ -89,46 +90,68 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Contact section handling
     const contactExploreBtn = document.querySelector('.contact-explore');
+    const contactInitialView = document.querySelector('.initial-contact-view');
     const contactExpandedContent = document.querySelector('.contact-expanded-content');
 
     contactExploreBtn?.addEventListener('click', function() {
-        contactExpandedContent.classList.toggle('active');
+        contactInitialView.style.display = 'none';
+        contactExpandedContent.classList.add('active');
     });
 
-    // User authentication modal handling
-    const userIcon = document.getElementById('user-icon');
-    const modal = document.getElementById('auth-modal');
-    const closeModal = document.getElementById('close-modal');
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const authForms = document.querySelectorAll('.auth-form');
+    // AI Section Handling
+    const aiExploreBtn = document.querySelector('.ai-explore');
+    const initialAIView = document.querySelector('.initial-ai-view');
+    const aiExpandedContent = document.querySelector('.ai-expanded-content');
+    const generateImageBtn = document.querySelector('.generate-image-button');
+    const randomImageContainer = document.getElementById('random-image-container');
 
-    userIcon.addEventListener('click', () => {
-        modal.style.display = 'block';
+    aiExploreBtn?.addEventListener('click', function() {
+        initialAIView.style.display = 'none';
+        aiExpandedContent.classList.add('active');
+        fetchRandomDogImage(); // Optionally load an image immediately upon expanding
     });
 
-    closeModal.addEventListener('click', () => {
-        modal.style.display = 'none';
+    generateImageBtn?.addEventListener('click', function() {
+        fetchRandomDogImage();
     });
 
-    window.addEventListener('click', (event) => {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
+    // Function to Fetch and Display Random Dog Image
+    function fetchRandomDogImage() {
+        fetch('https://random.dog/woof.json')
+            .then(response => response.json())
+            .then(data => {
+                const imageUrl = data.url;
+                const imageType = imageUrl.substring(imageUrl.lastIndexOf('.') + 1).toLowerCase();
+                let imgElement;
 
-    tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const tab = button.getAttribute('data-tab');
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-            authForms.forEach(form => {
-                form.classList.remove('active');
-                if (form.id === `${tab}-form`) {
-                    form.classList.add('active');
+                if (['mp4', 'webm'].includes(imageType)) {
+                    // If the file is a video, embed it
+                    imgElement = document.createElement('video');
+                    imgElement.src = imageUrl;
+                    imgElement.controls = true;
+                    imgElement.autoplay = true;
+                    imgElement.loop = true;
+                    imgElement.style.maxWidth = '100%';
+                } else {
+                    // If the file is an image
+                    imgElement = document.createElement('img');
+                    imgElement.src = imageUrl;
+                    imgElement.alt = 'Random Dog';
+                    imgElement.style.maxWidth = '100%';
                 }
+
+                // Clear any existing content
+                randomImageContainer.innerHTML = '';
+                randomImageContainer.appendChild(imgElement);
+            })
+            .catch(error => {
+                console.error('Error fetching random dog image:', error);
+                randomImageContainer.innerHTML = '<p>Failed to load image. Please try again.</p>';
             });
-        });
-    });
+    }
+
+    // Optionally, load a random image on page load
+    fetchRandomDogImage();
 });
 
 function filterProducts(category) {
