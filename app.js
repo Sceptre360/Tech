@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', (e) => {
             e.preventDefault();
             const sectionId = button.getAttribute('data-section');
+            const section = document.getElementById(sectionId);
 
             // Remove active states
             navButtons.forEach(btn => btn.classList.remove('active'));
@@ -14,7 +15,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Activate selected section and button
             button.classList.add('active');
-            document.getElementById(sectionId).classList.add('active');
+            section.classList.add('active');
+
+            // Center the section in the viewport
+            const offset = 60; // Height of the navigation buttons
+            const sectionPosition = section.getBoundingClientRect().top + window.scrollY - offset;
+
+            // Scroll to the section position
+            window.scrollTo({
+                top: sectionPosition,
+                behavior: 'smooth'
+            });
         });
     });
 
@@ -83,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         contactExpandedContent.classList.toggle('active');
     });
 
+    // User authentication modal handling
     const userIcon = document.getElementById('user-icon');
     const modal = document.getElementById('auth-modal');
     const closeModal = document.getElementById('close-modal');
@@ -127,23 +139,4 @@ function filterProducts(category) {
             product.style.display = 'none';
         }
     });
-// JavaScript to handle navigation clicks
-document.querySelectorAll('.nav-button').forEach(button => {
-    button.addEventListener('click', function() {
-        // Hide all sections
-        document.querySelectorAll('.section').forEach(section => {
-            section.classList.remove('active');
-        });
-
-        // Get the target section ID from the button's href attribute
-        const targetId = this.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
-
-        // Show the target section
-        if (targetSection) {
-            targetSection.classList.add('active');
-            targetSection.scrollIntoView({ behavior: 'smooth' }); // Scroll to the section
-        }
-    });
-});
 }

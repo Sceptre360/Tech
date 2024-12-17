@@ -133,14 +133,15 @@ body {
     min-height: calc(100vh - 60px);
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
     margin-top: 60px;
     opacity: 0;
     transition: opacity 0.5s ease;
     background-color: var(--primary-dark);
-    overflow-y: auto;
-    max-height: calc(100vh - 60px);
+    overflow-y: hidden;
+    scroll-snap-align: start;
 }
 
 .section.active {
@@ -189,7 +190,6 @@ body {
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
-    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1353,6 +1353,99 @@ body {
 /* Smooth Scrolling */
 html {
     scroll-behavior: smooth;
+}
+
+/* Scroll Snap for Sections */
+body {
+    overflow-y: scroll; /* Ensure vertical scrolling */
+    scroll-snap-type: y mandatory; /* Enable scroll snap */
+}
+
+.section {
+    scroll-snap-align: start; /* Snap to the start of each section */
+}
+
+/* Hide Scrollbars (optional) */
+body::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for WebKit browsers */
+}
+
+body {
+    -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer and Edge */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+/* Parallax Effect (optional) */
+.section {
+    position: relative;
+    overflow: hidden; /* Hide overflow for parallax effect */
+}
+
+.section-content {
+    position: relative;
+    z-index: 1; /* Ensure content is above background */
+}
+
+/* Example of a parallax background */
+.section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    background-size: cover;
+    background-attachment: fixed; /* Parallax effect */
+    z-index: 0; /* Behind the content */
+    opacity: 0.5; /* Adjust opacity for aesthetics */
+}
+
+.section:last-child {
+    margin-bottom: 80px;
+}
+
+/* Ensure the section content is centered and responsive */
+.section-content {
+    max-width: 800px; /* Limit the width for better readability */
+    margin: 0 auto; /* Center the content */
+    text-align: center; /* Center text */
+    flex: 1; /* Allow it to grow and fill available space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    padding: 20px; /* Add padding for spacing */
+}
+
+/* Hide overflow if content fits */
+.section:not(:last-child) {
+    overflow-y: hidden; /* Prevent scrolling if not the last section */
+}
+
+.section:last-child {
+    margin-bottom: 80px; /* Space above the navigation buttons */
+}
+
+/* Initial View Styles */
+.initial-view {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    height: 100%; /* Full height of the section */
+    text-align: center; /* Center text */
+}
+
+/* Expanded Content Styles */
+.expanded-content {
+    display: none; /* Initially hidden */
+}
+
+.expanded-content.active {
+    display: flex; /* Show when active */
+    flex-direction: column;
+    justify-content: flex-start; /* Align content to the top */
+    height: auto; /* Allow height to grow based on content */
+    overflow-y: auto; /* Allow scrolling if content exceeds height */
 }
 
 
