@@ -500,14 +500,17 @@ body {
 
 .expanded-content {
     display: none;
-    opacity: 0;
-    transition: opacity 0.5s ease;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
 }
 
 .expanded-content.active {
-    display: block;
-    opacity: 1;
-    animation: fadeScale 0.5s ease forwards;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: auto;
+    overflow-y: auto;
 }
 
 .solutions-grid {
@@ -666,47 +669,16 @@ body {
 }
 
 /* Product Section Styles */
-.initial-product-view {
-    text-align: center;
-    transition: all 0.5s ease;
-}
-
 .product-expanded-content {
-    display: none;
+    display: none; /* Initially hidden */
     opacity: 0;
     transition: all 0.5s ease;
 }
 
 .product-expanded-content.active {
-    display: block;
+    display: block; /* Show when active */
     opacity: 1;
     animation: fadeScale 0.5s ease forwards;
-}
-
-.product-categories {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin: 2rem 0;
-}
-
-.category-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.8rem 1.5rem;
-    background: rgba(30, 30, 30, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.category-btn.active {
-    background: rgba(0, 112, 243, 0.1);
-    border-color: var(--accent-blue);
-    color: var(--accent-blue);
 }
 
 .product-grid {
@@ -720,8 +692,15 @@ body {
     background: rgba(30, 30, 30, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 15px;
-    overflow: hidden;
+    padding: 2rem;
     transition: all 0.3s ease;
+    text-align: center; /* Center text */
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-blue);
+    box-shadow: 0 10px 30px rgba(0, 112, 243, 0.2);
 }
 
 .product-hologram {
@@ -1438,14 +1417,81 @@ body {
 /* Expanded Content Styles */
 .expanded-content {
     display: none; /* Initially hidden */
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.expanded-content.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: auto;
+    overflow-y: auto;
+}
+
+/* Responsive adjustments for mobile */
+@media screen and (max-width: 768px) {
+    .expanded-content {
+        padding: 1rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .section-content {
+        padding: 10px;
+        text-align: center;
+    }
+}
+
+/* Ensure sections have proper margins on mobile */
+.section {
+    margin: 1rem 0;
+}
+
+/* Responsive adjustments for buttons */
+.primary-button,
+.tech-button {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+}
+
+/* Expanded Content Styles */
+.expanded-content {
+    display: none; /* Initially hidden */
+    width: 100%; /* Ensure full width */
+    margin: 0 auto; /* Center the content */
+    padding: 1rem; /* Add padding for spacing */
+    box-sizing: border-box; /* Include padding in width calculation */
 }
 
 .expanded-content.active {
     display: flex; /* Show when active */
-    flex-direction: column;
-    justify-content: flex-start; /* Align content to the top */
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
     height: auto; /* Allow height to grow based on content */
     overflow-y: auto; /* Allow scrolling if content exceeds height */
+}
+
+/* Responsive adjustments for mobile */
+@media screen and (max-width: 768px) {
+    .expanded-content {
+        padding: 1rem; /* Adjust padding for mobile */
+        width: 100%; /* Ensure it takes full width */
+        box-sizing: border-box; /* Include padding in width calculation */
+    }
+
+    .section-content {
+        padding: 10px; /* Reduce padding for mobile */
+        text-align: center; /* Center text for better layout */
+    }
+
+    .section {
+        margin: 0; /* Remove margin to prevent shifting */
+        padding: 0; /* Remove padding to prevent shifting */
+    }
 }
 
 

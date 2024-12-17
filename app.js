@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     productExploreBtn?.addEventListener('click', () => {
         initialView.style.display = 'none';
         expandedContent.classList.add('active');
+        expandedContent.style.display = 'flex';
     });
 
     categoryBtns.forEach(btn => {
