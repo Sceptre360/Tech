@@ -130,20 +130,21 @@ body {
 
 /* Page Sections */
 .section {
-    min-height: calc(100vh - 60px - 60px);
-    display: none;
+    min-height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 20px;
+    margin-top: 60px;
     opacity: 0;
     transition: opacity 0.5s ease;
     background-color: var(--primary-dark);
-    padding: 20px;
+    overflow-y: auto;
+    max-height: calc(100vh - 60px);
 }
 
 .section.active {
-    display: flex;
     opacity: 1;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 /* Elegant Button Styles */
@@ -186,7 +187,12 @@ body {
 /* Content Styles */
 .section-content {
     max-width: 800px;
+    margin: 0 auto;
     text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding: 20px;
 }
 
@@ -1342,6 +1348,11 @@ body {
     .section-description {
         font-size: 0.9rem; /* Adjust description size for smaller screens */
     }
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
 }
 
 
