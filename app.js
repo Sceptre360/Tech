@@ -127,4 +127,23 @@ function filterProducts(category) {
             product.style.display = 'none';
         }
     });
+// JavaScript to handle navigation clicks
+document.querySelectorAll('.nav-button').forEach(button => {
+    button.addEventListener('click', function() {
+        // Hide all sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.classList.remove('active');
+        });
+
+        // Get the target section ID from the button's href attribute
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+
+        // Show the target section
+        if (targetSection) {
+            targetSection.classList.add('active');
+            targetSection.scrollIntoView({ behavior: 'smooth' }); // Scroll to the section
+        }
+    });
+});
 }
