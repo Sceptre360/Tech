@@ -17,11 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
             button.classList.add('active');
             section.classList.add('active');
 
-            // Center the section in the viewport
+            // Scroll to the section
             const offset = 60; // Height of the navigation buttons
             const sectionPosition = section.getBoundingClientRect().top + window.scrollY - offset;
 
-            // Scroll to the section position
             window.scrollTo({
                 top: sectionPosition,
                 behavior: 'smooth'
@@ -30,32 +29,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Home section expansion
-    const homeButton = document.querySelector('.primary-button');
+    const homeButton = document.querySelector('.initial-view .primary-button');
+    const homeInitialView = document.querySelector('.initial-view');
+    const homeExpandedContent = document.querySelector('.expanded-content');
+
     homeButton?.addEventListener('click', function() {
-        document.querySelector('.initial-view').style.display = 'none';
-        document.querySelector('.expanded-content').classList.add('active');
+        homeInitialView.style.display = 'none';
+        homeExpandedContent.classList.add('active');
     });
 
     // Product section handling
     const productExploreBtn = document.querySelector('.product-explore');
-    const initialView = document.querySelector('.initial-product-view');
-    const expandedContent = document.querySelector('.product-expanded-content');
+    const initialProductView = document.querySelector('.initial-product-view');
+    const productExpandedContent = document.querySelector('.product-expanded-content');
 
     productExploreBtn?.addEventListener('click', () => {
-        initialView.style.display = 'none';
-        expandedContent.classList.add('active');
-        expandedContent.style.display = 'flex';
-    });
-
-    // Category Buttons for Products
-    const categoryBtns = document.querySelectorAll('.category-btn');
-    categoryBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            categoryBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const category = btn.dataset.category;
-            filterProducts(category);
-        });
+        initialProductView.style.display = 'none';
+        productExpandedContent.classList.add('active');
     });
 
     // Service section handling
@@ -104,8 +94,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const aiExpandedContent = document.querySelector('.ai-expanded-content');
     const generateImageBtn = document.querySelector('.generate-image-button');
     const randomImageContainer = document.getElementById('random-image-container');
+    const downloadButton = document.getElementById('download-button'); // Download Button Element
 
     aiExploreBtn?.addEventListener('click', function() {
+        console.log('AI Explore Button Clicked'); // Debugging
         initialAIView.style.display = 'none';
         aiExpandedContent.classList.add('active');
         fetchRandomDogImage(); // Optionally load an image immediately upon expanding
@@ -115,45 +107,52 @@ document.addEventListener('DOMContentLoaded', () => {
         fetchRandomDogImage();
     });
 
-    // Function to Fetch and Display Random Dog Image
+    // Function to Fetch and Display Random Dog Image or Video
     function fetchRandomDogImage() {
         fetch('https://random.dog/woof.json')
             .then(response => response.json())
             .then(data => {
                 const imageUrl = data.url;
                 const imageType = imageUrl.substring(imageUrl.lastIndexOf('.') + 1).toLowerCase();
-                let imgElement;
+                let mediaElement;
 
                 if (['mp4', 'webm'].includes(imageType)) {
                     // If the file is a video, embed it
-                    imgElement = document.createElement('video');
-                    imgElement.src = imageUrl;
-                    imgElement.controls = true;
-                    imgElement.autoplay = true;
-                    imgElement.loop = true;
-                    imgElement.style.maxWidth = '100%';
+                    mediaElement = document.createElement('video');
+                    mediaElement.src = imageUrl;
+                    mediaElement.controls = true;
+                    mediaElement.autoplay = true;
+                    mediaElement.loop = true;
+                    mediaElement.style.maxWidth = '100%';
                 } else {
                     // If the file is an image
-                    imgElement = document.createElement('img');
-                    imgElement.src = imageUrl;
-                    imgElement.alt = 'Random Dog';
-                    imgElement.style.maxWidth = '100%';
+                    mediaElement = document.createElement('img');
+                    mediaElement.src = imageUrl;
+                    mediaElement.alt = 'Random AI Content';
+                    mediaElement.style.maxWidth = '100%';
                 }
 
                 // Clear any existing content
                 randomImageContainer.innerHTML = '';
-                randomImageContainer.appendChild(imgElement);
+                randomImageContainer.appendChild(mediaElement);
+
+                // Update Download Button
+                downloadButton.href = imageUrl;
+                downloadButton.download = imageUrl.split('/').pop(); // Extract filename from URL
+                downloadButton.style.display = 'inline-block'; // Show the button
             })
             .catch(error => {
                 console.error('Error fetching random dog image:', error);
-                randomImageContainer.innerHTML = '<p>Failed to load image. Please try again.</p>';
+                randomImageContainer.innerHTML = '<p>Failed to load content. Please try again.</p>';
+                downloadButton.style.display = 'none'; // Hide the download button on error
             });
     }
 
-    // Optionally, load a random image on page load
-    fetchRandomDogImage();
+    // Optionally, load a random image on page load for AI section
+    // fetchRandomDogImage();
 });
 
+// Function to Filter Products by Category (if needed)
 function filterProducts(category) {
     const products = document.querySelectorAll('.product-card');
     products.forEach(product => {

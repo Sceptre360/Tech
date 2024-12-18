@@ -1529,8 +1529,10 @@ body {
     border-radius: 10px;
 }
 
-/* Button Styles (if not already defined) */
-.generate-image-button {
+/* Button Styles */
+.primary-button,
+.generate-image-button,
+.download-button {
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
     background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
@@ -1539,13 +1541,29 @@ body {
     border-radius: 30px;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none; /* Remove underline for <a> tags */
 }
 
-.generate-image-button:hover {
+.primary-button:hover,
+.generate-image-button:hover,
+.download-button:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0, 112, 243, 0.3);
 }
 
+/* Specific Styles for Download Button (Optional) */
+.download-button {
+    margin-left: 10px; /* Adds space between Generate and Download buttons */
+    background: linear-gradient(135deg, #f0ad4e, #ec971f); /* Different gradient for download */
+}
+
+.download-button:hover {
+    box-shadow: 0 10px 20px rgba(244, 167, 32, 0.3); /* Matching hover effect */
+}
+
+/* Animations */
 @keyframes fadeScale {
     from {
         opacity: 0;
