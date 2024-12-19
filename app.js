@@ -227,7 +227,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartTotal = document.getElementById('cart-total');
     const checkoutButton = document.getElementById('checkout-button');
 
-    // Products Data (Ensure this matches the products in your HTML)
+    // Favorites Functionality
+    const favorites = [];
+
+    const addToFavoriteButtons = document.querySelectorAll('.add-to-favorite');
+    const favoritesModal = document.getElementById('favorites-modal');
+    const openFavoritesBtn = document.getElementById('open-favorites');
+    const closeFavoritesBtn = document.getElementById('close-favorites');
+    const favoritesItemsContainer = document.getElementById('favorites-items');
+    const favoritesEmpty = document.querySelector('.favorites-empty');
+    const clearFavoritesBtn = document.getElementById('clear-favorites-button');
+
+    // Products Data
     const products = [
         {
             id: 1,
@@ -241,29 +252,70 @@ document.addEventListener('DOMContentLoaded', () => {
             price: 2999, // KES 2,999
             image: 'Image/2.jpg'
         },
+        {
+            id: 3,
+            name: 'Product Three',
+            price: 3499, // KES 3,499
+            image: 'Image/3.jpg'
+        },
         // Add more products as needed
     ];
 
-    // Add to Cart Event
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const productId = parseInt(button.getAttribute('data-product-id'));
-            const product = products.find(p => p.id === productId);
-            if (product) {
-                const existingProduct = cart.find(item => item.id === productId);
-                if (existingProduct) {
-                    existingProduct.quantity += 1;
-                } else {
-                    cart.push({ ...product, quantity: 1 });
-                }
-                updateCart();
-            }
+    // Utility Functions
+
+    // Function to display notifications
+    function showNotification(message, type) {
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        if (type === 'success') {
+            toastr.success(message);
+        } else if (type === 'info') {
+            toastr.info(message);
+        } else if (type === 'warning') {
+            toastr.warning(message);
+        } else if (type === 'error') {
+            toastr.error(message);
+        }
+    }
+
+    // Load Data from localStorage
+
+    // Load Cart from localStorage
+    if (localStorage.getItem('cart')) {
+        const storedCart = JSON.parse(localStorage.getItem('cart'));
+        storedCart.forEach(item => {
+            cart.push(item);
         });
-    });
+    }
+
+    // Load Favorites from localStorage
+    if (localStorage.getItem('favorites')) {
+        const storedFavorites = JSON.parse(localStorage.getItem('favorites'));
+        storedFavorites.forEach(item => {
+            favorites.push(item);
+        });
+    }
+
+    // Update Functions
 
     // Update Cart Display
     function updateCart() {
-        // Update cart count
+        // Update cart count based on total unique items
         cartCount.textContent = cart.length;
 
         // Clear existing items
@@ -283,84 +335,55 @@ document.addEventListener('DOMContentLoaded', () => {
             itemName.classList.add('cart-item-name');
             itemName.textContent = item.name;
 
+            const itemQuantity = document.createElement('span');
+            itemQuantity.classList.add('cart-item-quantity');
+            itemQuantity.textContent = `Quantity: ${item.quantity}`;
+
             const itemPrice = document.createElement('span');
             itemPrice.classList.add('cart-item-price');
-            itemPrice.textContent = `KES ${(item.price * item.quantity).toLocaleString()}`;
+            itemPrice.textContent = `KES ${item.price.toLocaleString()}`;
 
-            const removeBtn = document.createElement('button');
-            removeBtn.classList.add('remove-item');
-            removeBtn.textContent = 'Remove';
-            removeBtn.addEventListener('click', () => {
-                cart.splice(index, 1);
-                updateCart();
+            const removeButton = document.createElement('button');
+            removeButton.classList.add('checkout-remove-button');
+            removeButton.textContent = 'Remove';
+            removeButton.addEventListener('click', () => {
+                if (confirm(`Are you sure you want to remove ${item.name} from your cart?`)) {
+                    cart.splice(index, 1);
+                    updateCart();
+                    showNotification(`${item.name} has been removed from your cart.`, 'info');
+                }
             });
 
             cartItem.appendChild(itemName);
+            cartItem.appendChild(itemQuantity);
             cartItem.appendChild(itemPrice);
-            cartItem.appendChild(removeBtn);
+            cartItem.appendChild(removeButton);
 
             cartItemsContainer.appendChild(cartItem);
         });
 
-        // Update total
+        // Update total price
         cartTotal.textContent = total.toLocaleString();
 
-        // Save cart to localStorage
+        // Save to localStorage
         localStorage.setItem('cart', JSON.stringify(cart));
     }
 
-    // Open Cart Modal
-    openCartBtn.addEventListener('click', () => {
-        cartModal.style.display = 'flex';
-    });
+    // Update Favorites Display
+    function updateFavorites() {
+        // Clear existing items
+        favoritesItemsContainer.innerHTML = '';
 
-    // Close Cart Modal
-    closeCartBtn.addEventListener('click', () => {
-        cartModal.style.display = 'none';
-    });
-
-    // Close Modal by clicking outside content
-    window.addEventListener('click', (event) => {
-        if (event.target === cartModal) {
-            cartModal.style.display = 'none';
-        }
-    });
-
-    // Checkout Button (Placeholder functionality)
-    checkoutButton.addEventListener('click', () => {
-        if (cart.length === 0) {
-            alert('Your cart is empty!');
+        if (favorites.length === 0) {
+            favoritesEmpty.style.display = 'block';
+            return;
         } else {
-            cartModal.style.display = 'none';
-            populateCheckoutCartItems();
-            checkoutModal.style.display = 'flex';
+            favoritesEmpty.style.display = 'none';
         }
-    });
 
-    // References to Checkout Modal Elements
-    const checkoutModal = document.getElementById('checkout-modal');
-    const closeCheckoutBtn = document.getElementById('close-checkout');
-    const checkoutForm = document.getElementById('checkout-form');
-    const checkoutCartItemsContainer = document.getElementById('checkout-cart-items');
-
-    // Open Checkout Modal
-    checkoutButton.addEventListener('click', () => {
-        if (cart.length === 0) {
-            showNotification('Your cart is empty!', 'error');
-        } else {
-            cartModal.style.display = 'none';
-            populateCheckoutCartItems();
-            checkoutModal.style.display = 'flex';
-        }
-    });
-
-    // Function to Populate Checkout Cart Items
-    function populateCheckoutCartItems() {
-        checkoutCartItemsContainer.innerHTML = ''; // Clear previous items
-
-        cart.forEach((item, index) => {
-            const checkoutItem = document.createElement('div');
-            checkoutItem.classList.add('checkout-cart-item');
+        favorites.forEach((item, index) => {
+            const favoriteItem = document.createElement('div');
+            favoriteItem.classList.add('checkout-cart-item');
 
             // Product Image
             const productImage = document.createElement('img');
@@ -383,150 +406,147 @@ document.addEventListener('DOMContentLoaded', () => {
             productDetails.appendChild(productName);
             productDetails.appendChild(productPrice);
 
-            // Quantity Input
-            const quantityDiv = document.createElement('div');
-            quantityDiv.classList.add('checkout-quantity');
-
-            const quantityLabel = document.createElement('label');
-            quantityLabel.setAttribute('for', `quantity-${item.id}`);
-            quantityLabel.textContent = 'Qty:';
-
-            const quantityInput = document.createElement('input');
-            quantityInput.type = 'number';
-            quantityInput.id = `quantity-${item.id}`;
-            quantityInput.name = `quantity-${item.id}`;
-            quantityInput.min = '1';
-            quantityInput.value = item.quantity;
-            quantityInput.classList.add('quantity-input');
-            quantityInput.addEventListener('change', (e) => {
-                const newQuantity = parseInt(e.target.value);
-                if (newQuantity < 1) {
-                    e.target.value = 1;
-                    return;
-                }
-                // Update the quantity in the cart
-                const cartItem = cart.find(ci => ci.id === item.id);
-                if (cartItem) {
-                    cartItem.quantity = newQuantity;
-                    updateCart();
-                    populateCheckoutCartItems(); // Refresh checkout items
+            // Remove Button
+            const removeButton = document.createElement('button');
+            removeButton.classList.add('checkout-remove-button');
+            removeButton.textContent = 'Remove';
+            removeButton.addEventListener('click', () => {
+                if (confirm(`Are you sure you want to remove ${item.name} from your favorites?`)) {
+                    favorites.splice(index, 1);
+                    updateFavorites();
+                    showNotification(`${item.name} has been removed from your favorites.`, 'info');
+                    // Re-enable the favorite button on the product card
+                    const favoriteBtn = document.querySelector(`.add-to-favorite[data-product-id="${item.id}"]`);
+                    if (favoriteBtn) {
+                        favoriteBtn.innerHTML = '<i class="fas fa-heart"></i> Add to Favorite';
+                        favoriteBtn.disabled = false;
+                        favoriteBtn.classList.remove('favorited');
+                    }
                 }
             });
 
-            quantityDiv.appendChild(quantityLabel);
-            quantityDiv.appendChild(quantityInput);
+            favoriteItem.appendChild(productImage);
+            favoriteItem.appendChild(productDetails);
+            favoriteItem.appendChild(removeButton);
 
-            checkoutItem.appendChild(productImage);
-            checkoutItem.appendChild(productDetails);
-            checkoutItem.appendChild(quantityDiv);
-
-            checkoutCartItemsContainer.appendChild(checkoutItem);
+            favoritesItemsContainer.appendChild(favoriteItem);
         });
+
+        // Save to localStorage
+        localStorage.setItem('favorites', JSON.stringify(favorites));
     }
 
-    // Close Checkout Modal
-    closeCheckoutBtn.addEventListener('click', () => {
-        checkoutModal.style.display = 'none';
-    });
+    // Event Listeners
 
-    // References to Success Modal Elements
-    const successModal = document.getElementById('success-modal');
-    const closeSuccessBtn = document.getElementById('close-success');
-    const closeSuccessButton = document.getElementById('close-success-button');
-    const successMessage = document.getElementById('success-message');
-
-    // Handle Checkout Form Submission
-    checkoutForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const pickupCity = document.getElementById('pickup-city').value.trim();
-        const pickupStreet = document.getElementById('pickup-street').value.trim();
-        const mpesaNumber = document.getElementById('mpesa-number').value.trim();
-        const mpesaName = document.getElementById('mpesa-name').value.trim();
-
-        // Validate M-Pesa Number (exactly 10 digits)
-        const mpesaNumberPattern = /^\d{10}$/;
-        if (!mpesaNumberPattern.test(mpesaNumber)) {
-            showNotification('Please enter a valid 10-digit M-Pesa number.', 'error');
-            return;
-        }
-
-        if (pickupCity === '' || pickupStreet === '') {
-            showNotification('Please enter both your pickup city and street.', 'error');
-            return;
-        }
-
-        if (mpesaName === '') {
-            showNotification('Please enter the name associated with your M-Pesa account.', 'error');
-            return;
-        }
-
-        const totalAmount = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
-
-        // Prepare Success Message with Product Details
-        let productDetails = '';
-        cart.forEach(item => {
-            productDetails += `${item.name} x${item.quantity} - KES ${(item.price * item.quantity).toLocaleString()}\n`;
+    // Add to Cart Event Listeners
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const productId = parseInt(button.getAttribute('data-product-id'));
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                const existingProduct = cart.find(item => item.id === productId);
+                if (existingProduct) {
+                    existingProduct.quantity += 1;
+                } else {
+                    cart.push({ ...product, quantity: 1 });
+                }
+                updateCart();
+                showNotification(`${product.name} has been added to your cart!`, 'success');
+            }
         });
-
-        const message = `Thank you for your purchase!\n\n` +
-            `Please send KES ${totalAmount.toLocaleString()} via Safaricom M-Pesa to 07488252.\n` +
-            `- M-Pesa Number: ${mpesaNumber}\n` +
-            `- M-Pesa Account Name: ${mpesaName}\n\n` +
-            `Pickup Address:\nCity: ${pickupCity}\nStreet: ${pickupStreet}\n\n` +
-            `Order Details:\n${productDetails}`;
-
-        // Set Success Message
-        successMessage.textContent = message;
-
-        // Display Success Modal
-        successModal.style.display = 'flex';
-
-        // Clear cart
-        cart.length = 0;
-        updateCart();
-
-        // Clear localStorage
-        localStorage.removeItem('cart');
     });
 
-    // Close Modals by clicking outside content
+    // Add to Favorite Event Listeners
+    addToFavoriteButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const productId = parseInt(button.getAttribute('data-product-id'));
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                const isAlreadyFavorite = favorites.some(item => item.id === productId);
+                if (!isAlreadyFavorite) {
+                    favorites.push({ ...product });
+                    updateFavorites();
+                    button.innerHTML = '<i class="fas fa-heart"></i> Favorited';
+                    button.classList.add('favorited');
+                    button.disabled = true;
+                    showNotification(`${product.name} has been added to your favorites!`, 'success');
+                } else {
+                    showNotification(`${product.name} is already in your favorites.`, 'info');
+                }
+            }
+        });
+    });
+
+    // Open Cart Modal
+    openCartBtn.addEventListener('click', () => {
+        updateCart();
+        cartModal.style.display = 'flex';
+    });
+
+    // Close Cart Modal
+    closeCartBtn.addEventListener('click', () => {
+        cartModal.style.display = 'none';
+    });
+
+    // Open Favorites Modal
+    openFavoritesBtn.addEventListener('click', () => {
+        updateFavorites();
+        favoritesModal.style.display = 'flex';
+    });
+
+    // Close Favorites Modal
+    closeFavoritesBtn.addEventListener('click', () => {
+        favoritesModal.style.display = 'none';
+    });
+
+    // Close Modals by Clicking Outside Content
     window.addEventListener('click', (event) => {
         if (event.target === cartModal) {
             cartModal.style.display = 'none';
         }
-        if (event.target === checkoutModal) {
-            checkoutModal.style.display = 'none';
+        if (event.target === favoritesModal) {
+            favoritesModal.style.display = 'none';
         }
     });
 
-    // Initial Cart Update
-    updateCart();
-
-    // Retrieve cart from localStorage on load
-    if (localStorage.getItem('cart')) {
-        const storedCart = JSON.parse(localStorage.getItem('cart'));
-        storedCart.forEach(item => {
-            cart.push(item);
+    // Clear All Favorites
+    if (clearFavoritesBtn) {
+        clearFavoritesBtn.addEventListener('click', () => {
+            if (favorites.length === 0) {
+                showNotification('You have no favorite items to clear.', 'info');
+                return;
+            }
+            if (confirm('Are you sure you want to clear all your favorite items?')) {
+                favorites.splice(0, favorites.length);
+                updateFavorites();
+                showNotification('All favorite items have been cleared.', 'info');
+                // Reset all favorite buttons on product cards
+                addToFavoriteButtons.forEach(button => {
+                    button.innerHTML = '<i class="fas fa-heart"></i> Add to Favorite';
+                    button.disabled = false;
+                    button.classList.remove('favorited');
+                });
+            }
         });
-        updateCart();
     }
 
-    // Close Success Modal when 'X' is clicked
-    closeSuccessBtn.addEventListener('click', () => {
-        successModal.style.display = 'none';
-    });
-
-    // Close Success Modal when 'Close' button is clicked
-    closeSuccessButton.addEventListener('click', () => {
-        successModal.style.display = 'none';
-    });
-
-    // Optional: Close Success Modal by clicking outside the modal content
-    window.addEventListener('click', (event) => {
-        if (event.target === successModal) {
-            successModal.style.display = 'none';
+    // Checkout Functionality
+    checkoutButton.addEventListener('click', () => {
+        if (cart.length === 0) {
+            showNotification('Your cart is empty. Add items to cart before checking out.', 'info');
+            return;
         }
+        // Implement checkout logic here
+        // For demonstration, we'll simulate a successful checkout
+        alert('Your payment has been received successfully. You will receive your products shortly.');
+        // Clear the cart after checkout
+        cart.splice(0, cart.length);
+        updateCart();
+        cartModal.style.display = 'none';
     });
+
+    // Initialize Displays on Load
+    updateCart();
+    updateFavorites();
 });
 

@@ -1983,4 +1983,168 @@ body {
     }
 }
 
+/* Remove Button Styles in Checkout Modal */
+.checkout-remove-button {
+    background-color: var(--accent-red);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 1rem;
+    font-size: 0.9rem;
+}
+
+.checkout-remove-button:hover {
+    background-color: #ff1a1a; /* Darker red on hover */
+}
+
+/* Adjustments for Checkout Cart Item Layout */
+.checkout-cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.checkout-quantity {
+    display: flex;
+    align-items: center;
+}
+
+.checkout-quantity label {
+    margin-right: 0.5rem;
+    color: var(--text-primary);
+    font-weight: bold;
+}
+
+.quantity-input {
+    width: 50px;
+    padding: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #2e2e2e;
+    color: #fff;
+}
+
+/* Add to Favorite Button Styles */
+.secondary-button.add-to-favorite {
+    background-color: var(--accent-red);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 0.5rem;
+}
+
+.secondary-button.add-to-favorite:hover {
+    background-color: #cc0000; /* Darker red on hover */
+}
+
+/* Favorites Modal Styles */
+#favorites-modal .modal-content {
+    max-width: 600px;
+    background-color: rgba(30, 30, 30, 0.95);
+    padding: 2rem;
+    border-radius: 10px;
+    position: relative;
+    color: #fff;
+    text-align: center;
+}
+
+#favorites-modal h2 {
+    margin-bottom: 1rem;
+    color: var(--accent-red);
+}
+
+#favorites-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.favorites-empty {
+    margin-top: 2rem;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+.checkout-remove-button {
+    background-color: var(--accent-red);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 0.8rem;
+    margin-left: 1rem;
+}
+
+.checkout-remove-button:hover {
+    background-color: #ff1a1a; /* Darker red on hover */
+}
+
+/* Favorites Icon Styles in Top Bar */
+.favorites-icon {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem; /* Adjust spacing as needed */
+}
+
+.favorites-icon i {
+    font-size: 1.5rem;
+    color: var(--accent-red);
+    transition: color 0.3s ease;
+}
+
+.favorites-icon i:hover {
+    color: #cc0000; /* Darker red on hover */
+}
+
+.favorites-icon .nav-button-text {
+    margin-left: 0.5rem;
+    font-size: 1rem;
+    color: var(--text-primary);
+    display: none; /* Hide text on smaller screens */
+}
+
+@media (min-width: 600px) {
+    .favorites-icon .nav-button-text {
+        display: inline; /* Show text on larger screens */
+    }
+}
+
+/* Optional: Style for Favorited State */
+.secondary-button.add-to-favorite.favorited {
+    background-color: #ff1a1a; /* Darker red for favorited state */
+    cursor: default;
+}
+
+.secondary-button.add-to-favorite.favorited i {
+    color: #fff;
+}
+
+/* Clear All Favorites Button Styles */
+.secondary-button.clear-favorites {
+    background-color: #ff4d4f; /* Slightly different red for distinction */
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+    font-size: 1rem;
+}
+
+.secondary-button.clear-favorites:hover {
+    background-color: #d9363e; /* Darker red on hover */
+}
+
 

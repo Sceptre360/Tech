@@ -7,6 +7,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
 <body>
     <!-- Top Navigation Bar -->
@@ -38,6 +42,11 @@
         <div class="cart-icon">
             <i class="fas fa-shopping-cart" id="open-cart" style="cursor: pointer;"></i>
             <span id="cart-count">0</span>
+        </div>
+        <!-- Favorites Icon -->
+        <div class="favorites-icon">
+            <i class="fas fa-heart" id="open-favorites" style="cursor: pointer;"></i>
+            <span class="nav-button-text">Favorites</span>
         </div>
     </div>
 
@@ -78,6 +87,7 @@
             <i class="fas fa-envelope nav-button-icon"></i>
             <span class="nav-button-text">Contact</span>
         </a>
+     
     </nav>
 
     <!-- Main Content Sections -->
@@ -163,20 +173,34 @@
             <div class="shop-grid">
                 <!-- Product Card 1 -->
                 <div class="product-card">
-                    <img src="Image/4.jpg" alt="Product 1" class="product-image">
+                    <img src="Image/4.jpg" alt="Product One" class="product-image">
                     <h3 class="product-name">Product One</h3>
                     <p class="product-description">Brief description of Product One.</p>
                     <span class="product-price">KES 4,999</span>
                     <button class="primary-button add-to-cart" data-product-id="1">Add to Cart</button>
+                    <button class="secondary-button add-to-favorite" data-product-id="1" aria-label="Add Product One to Favorites">
+                        <i class="fas fa-heart"></i> Add to Favorite
+                    </button>
                 </div>
 
                 <!-- Product Card 2 -->
                 <div class="product-card">
-                    <img src="Image/2.jpg" alt="Product 2" class="product-image">
+                    <img src="Image/2.jpg" alt="Product Two" class="product-image">
                     <h3 class="product-name">Product Two</h3>
                     <p class="product-description">Brief description of Product Two.</p>
                     <span class="product-price">KES 2,999</span>
                     <button class="primary-button add-to-cart" data-product-id="2">Add to Cart</button>
+                    <button class="secondary-button add-to-favorite" data-product-id="2">Add to Favorite</button>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="product-card">
+                    <img src="Image/3.jpg" alt="Product Three" class="product-image">
+                    <h3 class="product-name">Product Three</h3>
+                    <p class="product-description">Brief description of Product Three.</p>
+                    <span class="product-price">KES 3,499</span>
+                    <button class="primary-button add-to-cart" data-product-id="3">Add to Cart</button>
+                    <button class="secondary-button add-to-favorite" data-product-id="3">Add to Favorite</button>
                 </div>
 
                 <!-- Add more product cards as needed -->
@@ -242,10 +266,21 @@
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="app.js"></script>
-</body>
-</html>
+    <!-- Favorites Modal -->
+    <div id="favorites-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button" id="close-favorites">&times;</span>
+            <h2>Your Favorites</h2>
+            <div id="favorites-items">
+                <!-- Favorite items will be dynamically injected here -->
+            </div>
+            <div class="favorites-empty" style="display: none;">
+                <p>You have no favorite items.</p>
+            </div>
+            <button class="secondary-button clear-favorites" id="clear-favorites-button">Clear All Favorites</button>
+        </div>
+    </div>
+
 
     <!-- Reference to existing sections -->
     <section id="products" class="section">
