@@ -34,6 +34,11 @@
                 </div>
             </div>
         </div>
+        <!-- Cart Icon -->
+        <div class="cart-icon">
+            <i class="fas fa-shopping-cart" id="open-cart" style="cursor: pointer;"></i>
+            <span id="cart-count">0</span>
+        </div>
     </div>
 
     <!-- Background Grid -->
@@ -41,9 +46,13 @@
 
     <!-- Main Navigation -->
     <nav class="navigation">
-        <a href="#home" class="nav-button active" data-section="home">
+        <a href="#home" class="nav-button" data-section="home">
             <i class="fas fa-home nav-button-icon"></i>
             <span class="nav-button-text">Home</span>
+        </a>
+        <a href="#my-shop" class="nav-button active" data-section="my-shop">
+            <i class="fas fa-store nav-button-icon"></i>
+            <span class="nav-button-text">My Shop</span>
         </a>
         <a href="#products" class="nav-button" data-section="products">
             <i class="fas fa-cube nav-button-icon"></i>
@@ -72,7 +81,7 @@
     </nav>
 
     <!-- Main Content Sections -->
-    <section id="home" class="section active">
+    <section id="home" class="section">
         <div class="section-content">
             <!-- Initial View -->
             <div class="initial-view">
@@ -143,6 +152,100 @@
             </div>
         </div>
     </section>
+
+    <!-- My Shop Section -->
+    <section id="my-shop" class="section active">
+        <div class="section-content">
+            <h2 class="section-title">My Shop</h2>
+            <p class="section-description">
+                Browse and purchase our range of innovative products.
+            </p>
+            <div class="shop-grid">
+                <!-- Product Card 1 -->
+                <div class="product-card">
+                    <img src="Image/4.jpg" alt="Product 1" class="product-image">
+                    <h3 class="product-name">Product One</h3>
+                    <p class="product-description">Brief description of Product One.</p>
+                    <span class="product-price">KES 4,999</span>
+                    <button class="primary-button add-to-cart" data-product-id="1">Add to Cart</button>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="product-card">
+                    <img src="Image/2.jpg" alt="Product 2" class="product-image">
+                    <h3 class="product-name">Product Two</h3>
+                    <p class="product-description">Brief description of Product Two.</p>
+                    <span class="product-price">KES 2,999</span>
+                    <button class="primary-button add-to-cart" data-product-id="2">Add to Cart</button>
+                </div>
+
+                <!-- Add more product cards as needed -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button" id="close-cart">&times;</span>
+            <h2>Your Cart</h2>
+            <div id="cart-items">
+                <!-- Cart items will be dynamically injected here -->
+            </div>
+            <div class="cart-total">
+                <h3>Total: KES <span id="cart-total">0.00</span></h3>
+            </div>
+            <button class="primary-button" id="checkout-button">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button" id="close-checkout">&times;</span>
+            <h2>Checkout</h2>
+            <form id="checkout-form">
+                <label for="pickup-city">Pickup City:</label>
+                <input type="text" id="pickup-city" name="pickup-city" required>
+
+                <label for="pickup-street">Pickup Street:</label>
+                <input type="text" id="pickup-street" name="pickup-street" required>
+
+                <label for="mpesa-number">M-Pesa Number:</label>
+                <input type="text" id="mpesa-number" name="mpesa-number" pattern="^\d{10}$" placeholder="e.g., 0748825252" required>
+
+                <label for="mpesa-name">M-Pesa Account Name:</label>
+                <input type="text" id="mpesa-name" name="mpesa-name" placeholder="e.g., John Doe" required>
+
+                <h3>Payment Instructions</h3>
+                <p>Please send the total amount via Safaricom M-Pesa to the following number:</p>
+                <p><strong>M-Pesa Number:</strong> 07488252</p>
+                <button type="submit" class="primary-button">Confirm Payment</button>
+
+                <!-- Inside the <form id="checkout-form">, add the following div -->
+                <div id="checkout-cart-items" class="checkout-cart-items">
+                    <!-- Cart items with images and quantity inputs will be injected here -->
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button" id="close-success">&times;</span>
+            <h2>Purchase Confirmed!</h2>
+            <p id="success-message">
+                Your payment has been received successfully. You will receive your products shortly.
+            </p>
+            <button class="primary-button" id="close-success-button">Close</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
 
     <!-- Reference to existing sections -->
     <section id="products" class="section">
@@ -318,10 +421,16 @@
                         <!-- Random Image or Video will be displayed here -->
                     </div>
                     <button class="primary-button generate-image-button">Generate Random Image</button>
-                    <!-- Download Button Added Here -->
+                    <!-- Download Button -->
                     <a id="download-button" class="primary-button download-button" href="#" download style="display: none;">
                         Download
                     </a>
+
+                    <!-- New Section for Text-Based Image Generation -->
+                    <div class="text-image-generation">
+                        <input type="text" id="text-input" placeholder="Enter text to generate image" />
+                        <button class="primary-button generate-text-image-button">Generate Image</button>
+                    </div>
                 </div>
             </div>
         </div>
