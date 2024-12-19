@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- Toastr CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <!-- Toastr JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
 <body>
     <!-- Top Navigation Bar -->
@@ -229,27 +227,37 @@
             <span class="close-button" id="close-checkout">&times;</span>
             <h2>Checkout</h2>
             <form id="checkout-form">
-                <label for="pickup-city">Pickup City:</label>
-                <input type="text" id="pickup-city" name="pickup-city" required>
+                <!-- Pickup Address -->
+                <label for="pickup-address">Pickup Address:</label>
+                <input type="text" id="pickup-address" name="pickup-address" placeholder="e.g., 123 Main St" required>
 
-                <label for="pickup-street">Pickup Street:</label>
-                <input type="text" id="pickup-street" name="pickup-street" required>
+                <!-- Pickup Place -->
+                <label for="pickup-place">Pickup Place:</label>
+                <input type="text" id="pickup-place" name="pickup-place" placeholder="e.g., Nairobi" required>
 
+                <!-- Phone Number -->
+                <label for="phone-number">Phone Number:</label>
+                <input type="tel" id="phone-number" name="phone-number" pattern="^\d{10}$" placeholder="e.g., 0748825252" required>
+
+                <!-- M-Pesa Number -->
                 <label for="mpesa-number">M-Pesa Number:</label>
-                <input type="text" id="mpesa-number" name="mpesa-number" pattern="^\d{10}$" placeholder="e.g., 0748825252" required>
+                <input type="tel" id="mpesa-number" name="mpesa-number" pattern="^\d{10}$" placeholder="e.g., 0748825252" required>
 
+                <!-- M-Pesa Account Name -->
                 <label for="mpesa-name">M-Pesa Account Name:</label>
                 <input type="text" id="mpesa-name" name="mpesa-name" placeholder="e.g., John Doe" required>
 
                 <h3>Payment Instructions</h3>
                 <p>Please send the total amount via Safaricom M-Pesa to the following number:</p>
-                <p><strong>M-Pesa Number:</strong> 07488252</p>
-                <button type="submit" class="primary-button">Confirm Payment</button>
+                <p><strong>M-Pesa Number:</strong> 0748825274</p>
 
-                <!-- Inside the <form id="checkout-form">, add the following div -->
+                <!-- Cart Items in Checkout -->
                 <div id="checkout-cart-items" class="checkout-cart-items">
-                    <!-- Cart items with images and quantity inputs will be injected here -->
+                    <!-- Cart items with images and remove buttons will be dynamically injected here -->
                 </div>
+
+                <!-- Make Payment Button -->
+                <button type="button" class="primary-button" id="make-payment-button">Make Payment</button>
             </form>
         </div>
     </div>
@@ -258,10 +266,8 @@
     <div id="success-modal" class="modal" style="display: none;">
         <div class="modal-content">
             <span class="close-button" id="close-success">&times;</span>
-            <h2>Purchase Confirmed!</h2>
-            <p id="success-message">
-                Your payment has been received successfully. You will receive your products shortly.
-            </p>
+            <h2>Success!</h2>
+            <p>Your payment has been received successfully. You will receive your products shortly.</p>
             <button class="primary-button" id="close-success-button">Close</button>
         </div>
     </div>
