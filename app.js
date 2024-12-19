@@ -662,6 +662,8 @@ M-Pesa Account Name: ${mpesaName}
 
 After sending the payment, click OK to confirm.
         `);
+        makePaymentButton.disabled = true; // Disable the button to prevent multiple clicks
+        showNotification('Please wait for payment verification.', 'info');
 
         if (confirmation) {
             // Notify user to wait for payment verification
